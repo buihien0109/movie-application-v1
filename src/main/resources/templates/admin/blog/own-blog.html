@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{admin/layout/layout :: layout(~{:: title}, ~{}, ~{:: .content-wrapper}, ~{:: #js})}">
+
+<head>
+    <title>Bài viết của tôi</title>
+</head>
+
+<body>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/admin/dashboard">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Bài viết của tôi
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row py-2">
+                <div class="col-12">
+                    <a href="/admin/blogs/create" type="button" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Viết bài
+                    </a>
+                    <a href="/admin/blogs/own-blogs" type="button" class="btn btn-info">
+                        <i class="fas fa-redo"></i> Refresh
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table id="table-blog" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Tiêu đề</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<th:block id="js">
+    <script th:inline="javascript">
+        $('#table-blog').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "/api/admin/blogs/own-blogs",
+                "type": "GET"
+            },
+            "columns": [
+                {
+                    "data": "title", "render": function (data, type, row) {
+                        return `<a href="/admin/blogs/${row.id}/detail">${data}</a>`;
+                    }
+                },
+                {
+                    "data": "status",
+                    "render": function(data, type, row) {
+                        return data ? '<span class="badge bg-success">Công khai</span>' : '<span class="badge bg-secondary">Nháp</span>';
+                    }
+                },
+                {
+                    "data": "createdAt",
+                    "render": function(data, type, row) {
+                        return formatDate(data);
+                    }
+                }
+            ]
+        });
+    </script>
+</th:block>
+</body>
+
+</html>
