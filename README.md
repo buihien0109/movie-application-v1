@@ -1,28 +1,52 @@
-## Web xem phim Netflix phiên bản Việt Nam (version 2)
+## Trang web xem phim trực tuyến
 
 Link demo: http://103.237.147.34:8888/
 
 ### Triển khai ứng dụng
 
-Sau khi clone source về máy, truy cập vào thư mục `movie-app` chứa source code
+Sau khi clone source về máy, có thể triển khai ứng dụng theo 2 cách:
 
-```
-cd movie-app
+#### 1. Chạy ứng dụng với maven
+
+```bash
+mvn spring-boot:run
 ```
 
-Sử dụng docker-compose để triển khai ứng dụng
+#### 2. Triển khai ứng dụng với Docker Compose
 
 ```
 docker-compose up -d
 ```
 
+### Công nghệ sử dụng
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Thymeleaf
+- MySQL
+- Docker
+- Docker Compose
+- ...
+
 ### Sơ đồ thiết kế cơ sở dữ liệu
 
 - https://dbdiagram.io/d/db-movie-app-659cc597ac844320ae80c2f9
 
-### Màn hình quản trị (ADMIN)
+### Các chức năng chính
 
-- Trang đăng nhập : http://localhost:8080/dang-nhap
+#### 1. Người dùng
+- Tìm kiếm phim theo danh mục, thể loại, quốc gia
+- Xem thông tin chi tiết phim
+- Xem phim
+- Xem thông tin các bài viết
+- Đăng ký tài khoản, đăng nhập, đăng xuất
+- Quản lý thông tin cá nhân
+- Review phim, thêm phim vào danh sách yêu thích, xem lịch sử xem phim, quản lý đơn hàng, ...
+- Tìm kiếm, xem, mua phim trả phí
+
+#### 2. Quản trị viên
+
+Trang đăng nhập : /dang-nhap
 
 ```
 Role : ROLE_ADMIN
@@ -34,26 +58,15 @@ Username : user@gmail.com
 Password : 123
 ```
 
-- Trang quản trị : http://localhost:8080/admin
-
-Các chức năng trong trang quản trị:
-  - Quản lý phim
-  - Quản lý thể loại
-  - Quản lý tin tức
-  - Quản lý người dùng
-  - Quản lý diễn viên
-  - Quản lý đạo diễn
-
-### Màn hình khách hàng
-
-1. Trang chủ : http://localhost:8080
-2. Trang phim lẻ : http://localhost:8080/phim-le
-3. Trang phim bộ : http://localhost:8080/phim-bo
-4. Trang phim chiếu rạp : http://localhost:8080/phim-chieu-rap
-5. Trang chi tiết phim : http://localhost:8080/phim/115/trang-ti-phieu-luu-ky
-6. Trang xem phim : http://localhost:8080/xem-phim/115/trang-ti-phieu-luu-ky?tap=full
-7. Trang danh sách tin tức : http://localhost:8080/tin-tuc
-8. Trang chi tiết tin tức : http://localhost:8080/tin-tuc/30/top-11-phim-co-doanh-thu-cao-nhat-moi-thoi-ai
+- Xem các thông số thống kê tổng quan
+- Quản lý phim
+- Quản lý thể loại
+- Quản lý tin tức
+- Quản lý người dùng
+- Quản lý diễn viên
+- Quản lý đạo diễn
+- Quản lý đơn hàng
+- ...
 
 ### Github Action
 
