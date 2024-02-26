@@ -1,6 +1,18 @@
 ## Trang web xem phim trực tuyến
 
-Link demo: http://103.237.147.34:8888/
+**Link demo**: http://103.237.147.34:8888/
+
+**Trang đăng nhập**: http://103.237.147.34:8888/dang-nhap
+
+```
+Role : ROLE_ADMIN
+Email : admin@gmail.com
+Password : 123
+
+Role : ROLE_USER
+Email : duy@gmail.com
+Password : 123
+```
 
 ### Triển khai ứng dụng
 
@@ -46,18 +58,6 @@ docker-compose up -d
 
 #### 2. Quản trị viên
 
-Trang đăng nhập : /dang-nhap
-
-```
-Role : ROLE_ADMIN
-Username : admin@gmail.com
-Password : 123
-
-Role : ROLE_USER
-Username : duy@gmail.com
-Password : 123
-```
-
 - Xem các thông số thống kê tổng quan
 - Quản lý phim
 - Quản lý thể loại
@@ -92,14 +92,12 @@ jobs:
         distribution: 'temurin'
 
     - name: Build with Maven
-      working-directory: ./movie-app
       run: |
         echo "Maven version:"
         mvn -version
         mvn -B clean install
 
     - name: Build Docker Image
-      working-directory: ./movie-app
       run: docker build -t buihien0109/movie-app:latest .
 
     - name: Login to Docker Hub
