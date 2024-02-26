@@ -54,7 +54,7 @@ Username : admin@gmail.com
 Password : 123
 
 Role : ROLE_USER
-Username : user@gmail.com
+Username : duy@gmail.com
 Password : 123
 ```
 
