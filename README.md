@@ -1,63 +1,48 @@
-## Trang web xem phim trực tuyến
+# Trang Web Xem Phim Trực Tuyến
 
-**Link demo**: http://103.237.147.34:8888/
+**Link demo**: 
+- Trang người dùng: [Link](http://103.237.144.171:8888/)
+- Trang đăng nhập: [Link](http://103.237.144.171:8888/dang-nhap)
 
-**Trang đăng nhập**: http://103.237.147.34:8888/dang-nhap
+**Tài khoản thử nghiệm:**
 
-```
-Role : ROLE_ADMIN
-Email : admin@gmail.com
-Password : 123
+- **ROLE_ADMIN**
+  - Email: admin@gmail.com
+  - Mật khẩu: 123
 
-Role : ROLE_USER
-Email : duy@gmail.com
-Password : 123
-```
+- **ROLE_USER**
+  - Email: duy@gmail.com
+  - Mật khẩu: 123
 
-### Triển khai ứng dụng
+## Mục lục
+1. [Giới thiệu](#giới-thiệu)
+2. [Tính năng](#tính-năng)
+3. [Công nghệ sử dụng](#công-nghệ-sử-dụng)
+4. [Sơ đồ thiết kế cơ sở dữ liệu](#sơ-đồ-thiết-kế-cơ-sở-dữ-liệu)
+5. [Bắt đầu](#bắt-đầu)
+    - [Yêu cầu](#yêu-cầu)
+    - [Cài đặt](#cài-đặt)
+    - [Chạy ứng dụng trên local](#chạy-ứng-dụng-trên-local)
+    - [Triển khai với Docker](#triển-khai-với-docker)
+6. [Liên hệ](#liên-hệ)
 
-Sau khi clone source về máy, có thể triển khai ứng dụng theo 2 cách:
+## Giới thiệu
 
-#### 1. Chạy ứng dụng với maven
+**Web Xem Phim Trực Tuyến** - một nền tảng giúp bạn dễ dàng tìm kiếm, xem và quản lý các bộ phim yêu thích. Ứng dụng này được phát triển với mục tiêu cung cấp trải nghiệm người dùng mượt mà và an toàn cho cả người dùng thông thường và quản trị viên.
 
-```bash
-mvn spring-boot:run
-```
+## Tính năng
 
-#### 2. Triển khai ứng dụng với Docker Compose
-
-```
-docker-compose up -d
-```
-
-### Công nghệ sử dụng
-- Spring Boot
-- Spring Security
-- Spring Data JPA
-- Thymeleaf
-- MySQL
-- Docker
-- Docker Compose
-- ...
-
-### Sơ đồ thiết kế cơ sở dữ liệu
-
-- https://dbdiagram.io/d/db-movie-app-659cc597ac844320ae80c2f9
-
-### Các chức năng chính
-
-#### 1. Người dùng
+### Người dùng
 - Tìm kiếm phim theo danh mục, thể loại, quốc gia
 - Xem thông tin chi tiết phim
-- Xem phim
+- Xem phim trực tuyến
 - Xem thông tin các bài viết
 - Đăng ký tài khoản, đăng nhập, đăng xuất
 - Quản lý thông tin cá nhân
 - Review phim, thêm phim vào danh sách yêu thích, xem lịch sử xem phim, quản lý đơn hàng, ...
 - Tìm kiếm, xem, mua phim trả phí
 
-#### 2. Quản trị viên
-
+### Quản trị viên
 - Xem các thông số thống kê tổng quan
 - Quản lý phim
 - Quản lý thể loại
@@ -68,41 +53,63 @@ docker-compose up -d
 - Quản lý đơn hàng
 - ...
 
-### Github Action
+## Công nghệ sử dụng
 
-```yaml
-name: Java CI/CD Pipeline
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Thymeleaf
+- MySQL
+- Docker
+- Docker Compose
+- ...
 
-on:
-  push:
-    branches:
-      - main
+## Sơ đồ thiết kế cơ sở dữ liệu
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+- [Sơ đồ cơ sở dữ liệu](https://dbdiagram.io/d/db-movie-app-659cc597ac844320ae80c2f9)
 
-    steps:
-    - uses: actions/checkout@v2
+## Bắt đầu
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+### Yêu cầu
 
-    - name: Build with Maven
-      run: |
-        echo "Maven version:"
-        mvn -version
-        mvn -B clean install
+- Java 8 trở lên
+- Cơ sở dữ liệu MySQL
+- Docker (nếu triển khai với Docker)
 
-    - name: Build Docker Image
-      run: docker build -t buihien0109/movie-app:latest .
+### Cài đặt
 
-    - name: Login to Docker Hub
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+1. **Cloning repository:**
+    ```bash
+    git clone https://github.com/buihien0109/movie-application.git
+    ```
 
-    - name: Push Docker Image to Docker Hub
-      run: docker push buihien0109/movie-app:latest
+### Chạy ứng dụng trên local
+
+1. Di chuyển vào thư mục backend:
+    ```bash
+    cd movie-application
+    ```
+2. Cấu hình kết nối cơ sở dữ liệu trong `src/main/resources/application.properties`:
+    ```properties
+    spring.datasource.url=jdbc:mysql://localhost:3306/your_db_name
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
+    ```
+3. Xây dựng và chạy backend:
+    ```bash
+    mvn clean install
+    mvn spring-boot:run
+    ```
+
+### Triển khai với Docker
+Trong thư mục root của ứng dụng, sử dụng Docker Compose để triển khai ứng dụng.
+
+Chạy các containers:
+
+```bash
+docker-compose up -d
 ```
+
+## Liên hệ
+
+Email - [buivanhien19tb@gmail.com](mailto:buivanhien19tb@gmail.com)

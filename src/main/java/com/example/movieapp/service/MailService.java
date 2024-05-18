@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -26,6 +27,7 @@ public class MailService {
     private Integer port;
 
     // Send mail confirm registration
+    @Async
     public void sendMailConfirmRegistration(Map<String, String> data) {
         log.info("sendMailConfirmRegistration");
         log.info("Sending email request : {}", data);
@@ -55,6 +57,7 @@ public class MailService {
     }
 
     // Send mail reset password
+    @Async
     public void sendMailResetPassword(Map<String, String> data) {
         log.info("sendMailResetPassword");
         log.info("Sending email request : {}", data);
@@ -84,6 +87,7 @@ public class MailService {
     }
 
     // Send mail confirm order
+    @Async
     public void sendMailConfirmOrder(Map<String, Object> data) {
         log.info("sendMailConfirmOrder");
         log.info("Sending email request : {}", data);
